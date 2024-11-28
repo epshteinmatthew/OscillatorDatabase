@@ -9,5 +9,7 @@
     <orderEntry type="library" name="ROS" level="project" />
     <orderEntry type="library" name="jszip" level="application" />
     <orderEntry type="library" name="FileSaver.js" level="application" />
+    <orderEntry type="library" name="jszip" level="application" />
+    <orderEntry type="library" name="FileSaver.js" level="application" />
   </component>
 </module>

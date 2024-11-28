@@ -7,6 +7,30 @@
             integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
             crossorigin="anonymous"
         />
+
+        <style>
+            table {
+            border-collapse: collapse;
+            overflow-y:scroll;
+            height:500px;
+            display:block;
+        }
+
+        th {
+            background-color: #0b5ed7;
+            Color: white;
+            
+        }
+
+        th,
+        td {
+            width: 150px;
+            text-align: center;
+            border: 1px solid gray;
+            padding: 5px
+        }
+        </style>
+        <script src="sorttable.js"></script>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title></title>
@@ -34,6 +58,7 @@
             let minS = 100;
             let maxS = 0;
             let types = [];
+            let combos = {};
             document.addEventListener("DOMContentLoaded", function () {
                 const form = document.querySelector("#form");
                 const numReactionsInput =
@@ -71,8 +96,25 @@
                             if (data[i].numReactions < minR) {
                                 minR = data[i].numReactions;
                             }
+                            if(combos[`<tr><td>${data[i].numSpecies}</td><td>${data[i].numReactions}</td> <td>${data[i].modelType}</td>`] == null){
+                                combos[`<tr><td>${data[i].numSpecies}</td><td>${data[i].numReactions}</td> <td>${data[i].modelType}</td>`] = 1;
+                            } else{
+                                combos[`<tr><td>${data[i].numSpecies}</td><td>${data[i].numReactions}</td> <td>${data[i].modelType}</td>`] += 1;
+                            }
                         }
-
+                        let tableBody = "";
+                        for (let i = 0; i < Object.keys(combos).length; i++) {
+                            tableBody += Object.keys(combos)[i] + `<td>${combos[Object.keys(combos)[i]]}</td></tr>`
+                        }
+                        document.getElementById("table").innerHTML = "" +
+                            "<table id=\"sortable\">\n" +
+                            "            <thead>\n" +
+                            "                  <tr><th>Number of Species</th><th>Number of Reactions</th> <th>Model Type</th> <th>Number of Models Found</th></tr>\n" +
+                            "                </thead>\n" +
+                            "                <tbody>\n" + tableBody +
+                            "                </tbody>\n" +
+                            "                </table>"
+                        sorttable.makeSortable(document.getElementById("sortable"));
                         numSpeciesInput.setAttribute("min", minS.toString());
                         numSpeciesInput.setAttribute("max", maxS.toString());
                         numReactionsInput.setAttribute("min", minR.toString());
@@ -219,6 +261,12 @@
             <br />
             <br />
             <p id="spectext" class="text-primary"></p>
+            <div id = "table" class="full-width" style="justify-content: center; display: flex">
+
+            </div>
+            <br>
+
         </div>
+
     </body>
 </html>
