@@ -76,6 +76,7 @@
                 numSpeciesInput.addEventListener("input", lookupModels);
                 modelTypeInput.addEventListener("input", lookupModels);
 
+
                 load_metadata()
                     .then((mtd) => {
                         data = mtd; // Store the JSON data from the fetched URL
@@ -96,10 +97,13 @@
                             if (data[i].numReactions < minR) {
                                 minR = data[i].numReactions;
                             }
-                            if(combos[`<tr><td>${data[i].numSpecies}</td><td>${data[i].numReactions}</td> <td>${data[i].modelType}</td>`] == null){
-                                combos[`<tr><td>${data[i].numSpecies}</td><td>${data[i].numReactions}</td> <td>${data[i].modelType}</td>`] = 1;
+                            let id = i
+                            let key =`<tr
+                            ><td>${data[i].numSpecies}</td><td>${data[i].numReactions}</td> <td>${data[i].modelType}</td>`
+                            if(combos[key] == null){
+                                combos[key] = 1;
                             } else{
-                                combos[`<tr><td>${data[i].numSpecies}</td><td>${data[i].numReactions}</td> <td>${data[i].modelType}</td>`] += 1;
+                                combos[key] += 1;
                             }
                         }
                         let tableBody = "";
@@ -135,6 +139,12 @@
                         console.error("Error:", error); // Logs any error that occurred during the fetch
                     });
 
+
+                function setInputs(ns, nr, mt) {
+                    numSpeciesInput.value = ns;
+                    numReactionsInput.value = nr;
+                    modelTypeInput.value = mt;
+                }
                 function lookupModels() {
                     const species_num = numSpeciesInput.value
                         ? parseInt(numSpeciesInput.value)
