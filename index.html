@@ -33,6 +33,7 @@
             let maxR = 0;
             let minS = 100;
             let maxS = 0;
+            let types = [];
             document.addEventListener("DOMContentLoaded", function () {
                 const form = document.querySelector("#form");
                 const numReactionsInput =
@@ -55,6 +56,9 @@
                         data = mtd; // Store the JSON data from the fetched URL
                         console.log(data[0]);
                         for (let i = 0; i < data.length; i++) {
+                            if (!types.includes(data[i].modelType)) {
+                                types.push(data[i].modelType);
+                            }
                             if (data[i].numSpecies > maxS) {
                                 maxS = data[i].numSpecies;
                             }
@@ -78,6 +82,12 @@
                             `Number of Species (${minS.toString()}-${maxS.toString()}):`;
                         document.querySelector("#nrpl").textContent =
                             `Number of Reactions (${minR.toString()}-${maxR.toString()}):`;
+
+                        let typesStr = "<option selected=\"\">Please select</option>";
+                        types.forEach((typesStrKey) => {
+                            typesStr += `<option value=\"${typesStrKey}\">${typesStrKey}</option>`;
+                        });
+                        document.getElementById("mtype").innerHTML = typesStr
                     })
                     .catch((error) => {
                         console.error("Error:", error); // Logs any error that occurred during the fetch
@@ -197,13 +207,6 @@
                             placeholder="Please select"
                             required=""
                         >
-                            <option selected="">Please select</option>
-                            <!-- <option value="oscillator">oscillator</option> -->
-                            <!-- <option value="oscillator">Oscillator</option>
-          <option value="linear">Linear Chain</option>
-          <option value="random">Random</option> -->
-                            <option value="oscillator">oscillator</option>
-                            <option value="random">random</option>
                         </select>
                     </div>
                 </div>
