@@ -97,32 +97,7 @@
                             if (data[i].numReactions < minR) {
                                 minR = data[i].numReactions;
                             }
-                            let id = i
-                            let key =`<tr
-                            ><td>${data[i].numSpecies}</td><td>${data[i].numReactions}</td> <td>${data[i].modelType}</td>`
-                            if(combos[key] == null){
-                                combos[key] = 1;
-                            } else{
-                                combos[key] += 1;
-                            }
                         }
-                        let tableBody = "";
-                        for (let i = 0; i < Object.keys(combos).length; i++) {
-                            tableBody += Object.keys(combos)[i] + `<td>${combos[Object.keys(combos)[i]]}</td></tr>`
-                        }
-                        document.getElementById("table").innerHTML = "" +
-                            "<table id=\"sortable\">\n" +
-                            "            <thead>\n" +
-                            "                  <tr><th>Number of Species</th><th>Number of Reactions</th> <th>Model Type</th> <th>Number of Models Found</th></tr>\n" +
-                            "                </thead>\n" +
-                            "                <tbody>\n" + tableBody +
-                            "                </tbody>\n" +
-                            "                </table>"
-                        sorttable.makeSortable(document.getElementById("sortable"));
-                        numSpeciesInput.setAttribute("min", minS.toString());
-                        numSpeciesInput.setAttribute("max", maxS.toString());
-                        numReactionsInput.setAttribute("min", minR.toString());
-                        numReactionsInput.setAttribute("max", maxR.toString());
 
                         document.querySelector("#nspl").textContent =
                             `Number of Species (${minS.toString()}-${maxS.toString()}):`;
@@ -145,6 +120,37 @@
                     numReactionsInput.value = nr;
                     modelTypeInput.value = mt;
                 }
+
+                function updateTable(){
+                    combos = {}
+                    for (let i = 0; i < data.length; i++){
+                        if(data[i].modelType === modelTypeInput.value) {
+                                let key = `<tr
+                            ><td>${data[i].numSpecies}</td><td>${data[i].numReactions}</td> <td>${data[i].modelType}</td>`
+                                if (combos[key] == null) {
+                                    combos[key] = 1;
+                                } else {
+                                    combos[key] += 1;
+                                }
+                        }
+                    }
+                    let tableBody = "";
+                        for (let i = 0; i < Object.keys(combos).length; i++) {
+                            tableBody += Object.keys(combos)[i] + `<td>${combos[Object.keys(combos)[i]]}</td></tr>`
+                        }
+                        document.getElementById("table").innerHTML = "" +
+                            "<table id=\"sortable\">\n" +
+                            "            <thead>\n" +
+                            "                  <tr><th>Number of Species</th><th>Number of Reactions</th> <th>Model Type</th> <th>Number of Models Found</th></tr>\n" +
+                            "                </thead>\n" +
+                            "                <tbody>\n" + tableBody +
+                            "                </tbody>\n" +
+                            "                </table>"
+                        sorttable.makeSortable(document.getElementById("sortable"));
+
+                    }
+
+
                 function lookupModels() {
                     const species_num = numSpeciesInput.value
                         ? parseInt(numSpeciesInput.value)
@@ -158,6 +164,7 @@
                             : null;
 
                     document.getElementById("spectext").innerHTML = "";
+                    updateTable()
                     paths = data
                         .filter(
                             (item) =>
