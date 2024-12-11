@@ -104,11 +104,16 @@
                         document.querySelector("#nrpl").textContent =
                             `Number of Reactions (${minR.toString()}-${maxR.toString()}):`;
 
-                        let typesStr = "<option selected=\"\">Please select</option>";
+                        let typesStr = "";
                         types.forEach((typesStrKey) => {
-                            typesStr += `<option value=\"${typesStrKey}\">${typesStrKey}</option>`;
-                        });
+                            if(typesStrKey === "oscillator"){
+                                typesStr += `<option value=\"${typesStrKey}\" selected>${typesStrKey}</option>`;
+                            } else {
+                                typesStr += `<option value=\"${typesStrKey}\">${typesStrKey}</option>`;
+                            }});
+                        setInputs(2,3,"oscillator")
                         document.getElementById("mtype").innerHTML = typesStr
+                        lookupModels()
                     })
                     .catch((error) => {
                         console.error("Error:", error); // Logs any error that occurred during the fetch
@@ -152,16 +157,14 @@
 
 
                 function lookupModels() {
+                    console.log(modelTypeInput.value)
                     const species_num = numSpeciesInput.value
                         ? parseInt(numSpeciesInput.value)
                         : null;
                     const reaction_num = numReactionsInput.value
                         ? parseInt(numReactionsInput.value)
                         : null;
-                    const model_type =
-                        modelTypeInput.value !== "Please select"
-                            ? modelTypeInput.value
-                            : null;
+                    const model_type = modelTypeInput.value
 
                     document.getElementById("spectext").innerHTML = "";
                     updateTable()
@@ -253,12 +256,12 @@
                     name="nreactions"
                 /><br />
 
-                <div class="row mb-4 justify-content-center">
+                <div class="row mb-4 justify-content-center" >
                     <div class="col-auto">
                         <label for="mtype" class="col-sm-10 col-form-label"
                             >Model Type</label
                         >
-                        <select
+                        <select style="width: 250px"
                             class="form-select"
                             id="mtype"
                             name="mtype"
