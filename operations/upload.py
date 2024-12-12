@@ -12,10 +12,16 @@ def process_model(file_path, filename, data):
         r = te.loada(model_string)
         numSpecies = r.getNumFloatingSpecies()
         numReactions = r.getNumReactions()
+        modelType = "-"
+        if "oscillator" in filename:
+            modelType = "oscillator"
+        elif "random" in filename:
+            modelType = "random"
         data.append({
             "numSpecies": numSpecies,
             "numReactions": numReactions,
-            "path": file_path + "/" + filename
+            "path": file_path + "/" + filename,
+            "modelType": modelType
         })
 
 
