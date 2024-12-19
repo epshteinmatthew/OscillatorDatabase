@@ -39,7 +39,7 @@ def get_metadata(repoURL: str):
     :param repoURL: the url of the github repo where the metadata is stored
     :return: the metadata
     """
-    rawUrl = "https://raw.githubusercontent.com/" + repoURL.split("/")[3] + "/" + repoURL.split("/")[4] + "/master/"
+    rawUrl = "https://raw.githubusercontent.com/" + repoURL.split("/")[3] + "/" + repoURL.split("/")[4] + "/refs/heads/master/"
     checksum = requests.get(
         rawUrl + "checksum").text
     if not os.path.isfile("../../checksum") or not os.path.isfile("../../metadata.json"):
@@ -69,8 +69,8 @@ async def downloadAntString(url, session, resultant_dir):
         print("Unable to get url {} due to {}.".format(url, e.__class__))
 
 
-async def lookup(data: list[Model], resultant_dir: str, num_species: int = None, num_reactions: int = None,
-                 model_type=None):
+async def lookup(data: list[Model], repoURL:str, resultant_dir: str, num_species: int = None, num_reactions: int = None,
+                 model_type=None, ):
     """
     lookup and download tellurium models to the filesystem based on provided criteria
     :param data: list of metadata for models
@@ -79,13 +79,14 @@ async def lookup(data: list[Model], resultant_dir: str, num_species: int = None,
     :param num_reactions: number of reactions
     :param model_type: type of model
     """
+    rawUrl = "https://raw.githubusercontent.com/" + repoURL.split("/")[3] + "/" + repoURL.split("/")[4] + "/refs/heads/master/"
     paths = []
     for item in data:
         if (num_species is None or item.numSpecies == num_species) and \
                 (num_reactions is None or item.numReactions == num_reactions) and \
                 (model_type is None or item.modelType == model_type):
             paths.append(
-                "https://raw.githubusercontent.com/epshteinmatthew/OscillatorDatabase/master/" + item.path)
+                rawUrl + item.path)
     if not os.path.isdir(resultant_dir):
         os.mkdir(resultant_dir)
     async with aiohttp.ClientSession() as session:
@@ -186,6 +187,6 @@ for line in e:
 print(get_number_of_models_with_attrib(metadata, num_species=3, model_type="oscillator"))
 
 #example: lookup models with 3 species and 3 reactions, and put them into the "osc123" directory
-asyncio.run(lookup(metadata, "osc123/", 3, 4, "oscillator"))
+asyncio.run(lookup(metadata, "https://github.com/epshteinmatthew/OscillatorDatabase","osc123/" ,3, 4, "oscillator"))
 end = time.time()
 print(end - start)
