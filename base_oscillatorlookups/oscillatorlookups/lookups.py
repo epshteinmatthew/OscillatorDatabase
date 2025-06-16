@@ -174,6 +174,7 @@ def get_number_of_models_with_attrib(data: list[Model], num_species:int=None, nu
     return count
 
 
+'''
 start = time.time()
 metadata = get_metadata("https://github.com/epshteinmatthew/OscillatorDatabase")
 print(time.time() - start)
@@ -190,3 +191,4 @@ print(get_number_of_models_with_attrib(metadata, num_species=3, model_type="osci
 asyncio.run(lookup(metadata, "https://github.com/epshteinmatthew/OscillatorDatabase","osc123/" ,3, 4, "oscillator"))
 end = time.time()
 print(end - start)
+'''
