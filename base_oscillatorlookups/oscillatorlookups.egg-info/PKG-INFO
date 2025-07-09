@@ -1,6 +1,6 @@
-Metadata-Version: 2.2
+Metadata-Version: 2.4
 Name: oscillatorlookups
-Version: 1.6
+Version: 1.7
 Summary: Lookup operations for oscillator database
 Author: Matthew Epshtein
 Author-email: <epshteinmatthew@gmail.com>
@@ -20,6 +20,7 @@ Dynamic: author-email
 Dynamic: classifier
 Dynamic: description
 Dynamic: keywords
+Dynamic: license-file
 Dynamic: requires-dist
 Dynamic: summary
 

@@ -94,6 +94,31 @@ async def lookup(data: list[Model], repoURL:str, resultant_dir: str, num_species
             downloadAntString(url, session,
                               resultant_dir) for url in paths))
 
+async def lookup_range(data: list[Model], repoURL:str, resultant_dir: str, num_species: range = None, num_reactions: range = None,
+                 model_type=None, ):
+    """
+    lookup and download tellurium models to the filesystem based on provided criteria
+    :param data: list of metadata for models
+    :param resultant_dir: directory to which the files should be downloaded
+    :param num_species: number of species as a range
+    :param num_reactions: number of reactions as range
+    :param model_type: type of model
+    """
+    rawUrl = "https://raw.githubusercontent.com/" + repoURL.split("/")[3] + "/" + repoURL.split("/")[4] + "/refs/heads/master/"
+    paths = []
+    for item in data:
+        if (num_species is None or item.numSpecies in num_species) and \
+                (num_reactions is None or item.numReactions in num_reactions) and \
+                (model_type is None or item.modelType in model_type):
+            paths.append(
+                rawUrl + item.path)
+    if not os.path.isdir(resultant_dir):
+        os.mkdir(resultant_dir)
+    async with aiohttp.ClientSession() as session:
+        ret = await asyncio.gather(*(
+            downloadAntString(url, session,
+                              resultant_dir) for url in paths))
+
 
 def get_summary(data: list[Model], asString: bool = False):
     """
