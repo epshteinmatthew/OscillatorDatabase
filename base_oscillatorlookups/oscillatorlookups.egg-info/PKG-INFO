@@ -1,11 +1,11 @@
 Metadata-Version: 2.4
 Name: oscillatorlookups
-Version: 1.7
+Version: 1.8
 Summary: Lookup operations for oscillator database
 Author: Matthew Epshtein
 Author-email: <epshteinmatthew@gmail.com>
 Keywords: python,first package
-Classifier: Development Status :: 3 - Alpha
+Classifier: Development Status :: 5 - Production/Stable
 Classifier: Intended Audience :: Education
 Classifier: Programming Language :: Python :: 2
 Classifier: Programming Language :: Python :: 3

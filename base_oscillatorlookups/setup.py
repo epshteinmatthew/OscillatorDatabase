@@ -1,7 +1,7 @@
 
 from setuptools import setup, find_packages
 
-VERSION = '1.7'
+VERSION = '1.8'
 DESCRIPTION = 'Lookup operations for oscillator database'
 LONG_DESCRIPTION = 'Lookup operations for oscillator database, hosted on github'
 
@@ -24,7 +24,7 @@ setup(
 
     keywords=['python', 'first package'],
     classifiers=[
-        "Development Status :: 3 - Alpha",
+        "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Education",
         "Programming Language :: Python :: 2",
         "Programming Language :: Python :: 3",
