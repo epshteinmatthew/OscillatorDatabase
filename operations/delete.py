@@ -13,7 +13,6 @@ def delete(path):
         else:
             paths = [pt for pt in os.listdir(path)]
         for item in data:
-            print("yes")
             if item['path'] in paths:
                 data.remove(item)
                 break
