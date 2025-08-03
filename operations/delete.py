@@ -10,10 +10,12 @@ def delete(path):
             data = json.load(f)
         if os.path.isfile(path):
             paths = [path]
+            print(path)
         else:
             paths = [pt for pt in os.listdir(path)]
         for item in data:
             if item['path'] in paths:
+                print("yes")
                 data.remove(item)
                 break
         with open("metadata.json", "w") as f:
