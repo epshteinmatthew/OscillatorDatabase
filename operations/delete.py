@@ -18,8 +18,8 @@ def delete(path):
                 break
         with open("metadata.json", "w") as f:
             json.dump(data, f)
-        with open("checksum", "w+") as ch:
-            ch.write(( int(ch.read())+1).__str__())
+        with open("checksum", "a") as ch:
+            ch.write("1")
         print("added model")
         return
     except Exception as e:
