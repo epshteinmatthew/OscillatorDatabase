@@ -22,7 +22,7 @@ def delete(path):
             ch.write(( int(ch.read())+1).__str__())
         print("added model")
         return
-    except:
-        print("failed to add placeholder")
+    except Exception as e:
+        print(e)
 
 delete(sys.argv[1])
