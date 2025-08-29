@@ -33,8 +33,8 @@ jobs:
       - name: commit changed files
         run: git commit -m "Auto updating files"
       - name: fetch from master
-        run: git fetch origin main
+        run: git fetch origin master
       - name: push code to master
-        run: git push origin HEAD:main
+        run: git push origin HEAD:master
 
 

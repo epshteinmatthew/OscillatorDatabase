@@ -39,8 +39,8 @@ def edit(filepath_to_change, replacement_ant_string):
             json.dump(data, f)
         with open(filepath_to_change, "w") as fp:
             fp.write(replacement_ant_string)
-        with open("checksum", "w") as ch:
-            ch.write(( int(ch.read())+1).__str__())
+        with open("checksum", "a") as ch:
+            ch.write("1")
         print("added model")
         return
     except:
