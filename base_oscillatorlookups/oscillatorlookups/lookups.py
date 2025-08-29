@@ -30,7 +30,7 @@ def request_metadata(checksum, url):
         f.write(data)
     with open("../../checksum", "w") as f:
         f.write(checksum)
-    return data
+    return msgspec.json.decode(data, type=list[Model])
 
 
 def get_metadata(repoURL: str):
