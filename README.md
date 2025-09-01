@@ -5,7 +5,7 @@ A database hosted on the internet can be a cost-effective and user-friendly meth
 
 ### Important Links:
 
-- Website: https://sys-bio.github.io/cesium/
+- Website: https://sys-bio.github.io/cesium/ AND https://epshteinmatthew.github.io/OscillatorDatabase/website/
 - Package on PyPi: https://pypi.org/project/oscillatorlookups/
 - Preprint: 
 
