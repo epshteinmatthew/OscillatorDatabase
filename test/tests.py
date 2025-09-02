@@ -10,7 +10,7 @@ import oscillatorlookups as lookups
 #todo: add pytest
 
 data = lookups.get_metadata("https://github.com/epshteinmatthew/OscillatorDatabase")
-dir_path = "/home/epshtein/PycharmProjects/cesiumtest/result" 
+dir_path = "result" 
 
 def test_length():
     numModels = lookups.get_number_of_models_with_attrib(data)
@@ -57,8 +57,6 @@ def test_lookup(): # relative path for now
 
     pairs_keys = list(pairs.keys())
     random_key = pairs_keys[random.randint(0, len(pairs_keys))]
-
-    shutil.rmtree(dir_path)
 
     asyncio.run(lookup(random_key))
 
