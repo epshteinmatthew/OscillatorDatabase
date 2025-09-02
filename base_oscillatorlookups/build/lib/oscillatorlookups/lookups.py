@@ -26,9 +26,9 @@ def request_metadata(checksum, url):
     """
     data = requests.get(url
                         ).text
-    with open("../../metadata.json", "w") as f:
+    with open("./metadata.json", "w") as f:
         f.write(data)
-    with open("../../checksum", "w") as f:
+    with open("./checksum", "w") as f:
         f.write(checksum)
     return msgspec.json.decode(data, type=list[Model])
 
@@ -42,13 +42,13 @@ def get_metadata(repoURL: str):
     rawUrl = "https://raw.githubusercontent.com/" + repoURL.split("/")[3] + "/" + repoURL.split("/")[4] + "/refs/heads/master/"
     checksum = requests.get(
         rawUrl + "checksum").text
-    if not os.path.isfile("../../checksum") or not os.path.isfile("../../metadata.json"):
+    if not os.path.isfile("./checksum") or not os.path.isfile("./metadata.json"):
         return request_metadata(checksum, rawUrl + "metadata.json")
-    with open("../../checksum", "r") as f:
+    with open("./checksum", "r") as f:
         loadck = f.read()
     if checksum != loadck:
         return request_metadata(checksum, rawUrl + "metadata.json")
-    with open("../../metadata.json", "r") as f:
+    with open("./metadata.json", "r") as f:
         return msgspec.json.decode(f.read(), type=list[Model])
 
 
@@ -173,9 +173,9 @@ def get_accepted_ranges(data: list[Model], reactions: bool = True, species: bool
     """
     dicts = {}
     if reactions:
-        dicts["reactionsRange"] = ({item.modelType for item in data})
+        dicts["reactionsRange"] = ({item.numReactions for item in data})
     if species:
-        dicts["speciesRange"] = ({item.modelType for item in data})
+        dicts["speciesRange"] = ({item.numSpecies for item in data})
     for key in dicts.keys():
         dicts[key] = (min(dicts[key]), max(dicts[key]))
     return dicts

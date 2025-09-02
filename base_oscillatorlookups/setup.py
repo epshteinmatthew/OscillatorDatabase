@@ -1,7 +1,7 @@
 
 from setuptools import setup, find_packages
 
-VERSION = '1.8.1'
+VERSION = '1.8.3'
 DESCRIPTION = 'Lookup operations for oscillator database'
 LONG_DESCRIPTION = 'Lookup operations for oscillator database, hosted on github'
 

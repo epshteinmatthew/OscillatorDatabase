@@ -173,9 +173,9 @@ def get_accepted_ranges(data: list[Model], reactions: bool = True, species: bool
     """
     dicts = {}
     if reactions:
-        dicts["reactionsRange"] = ({item.modelType for item in data})
+        dicts["reactionsRange"] = ({item.numReactions for item in data})
     if species:
-        dicts["speciesRange"] = ({item.modelType for item in data})
+        dicts["speciesRange"] = ({item.numSpecies for item in data})
     for key in dicts.keys():
         dicts[key] = (min(dicts[key]), max(dicts[key]))
     return dicts
