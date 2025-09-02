@@ -1,9 +1,6 @@
 import asyncio
 import os
 import random
-import shutil
-
-import pytest
 import tellurium as te
 import oscillatorlookups as lookups
 
