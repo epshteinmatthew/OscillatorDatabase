@@ -4,6 +4,7 @@ import random
 import tellurium as te
 import oscillatorlookups as lookups
 from oscillatorlookups.lookups import Model
+import msgspec.json
 
 data = lookups.get_metadata("https://github.com/epshteinmatthew/OscillatorDatabase")
 dir_path = "result" 
