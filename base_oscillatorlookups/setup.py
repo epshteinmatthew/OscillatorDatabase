@@ -1,14 +1,14 @@
 
 from setuptools import setup, find_packages
 
-VERSION = '1.8.3'
-DESCRIPTION = 'Lookup operations for oscillator database'
-LONG_DESCRIPTION = 'Lookup operations for oscillator database, hosted on github'
+VERSION = '1.8.4'
+DESCRIPTION = 'Lookup operations for cesium database'
+LONG_DESCRIPTION = 'Lookup operations for cesium database, hosted on github'
 
 # Setting up
 setup(
     # the name must match the folder name 'verysimplemodule'
-    name="oscillatorlookups",
+    name="cesiumlookups",
     version=VERSION,
     author="Matthew Epshtein",
     author_email="<epshteinmatthew@gmail.com>",
