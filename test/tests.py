@@ -2,8 +2,8 @@ import asyncio
 import os
 import random
 import tellurium as te
-import cesiumlookups as lookups
-from cesiumlookups.lookups import Model
+import oscillatorlookups as lookups
+from oscillatorlookups.lookups import Model
 import msgspec.json
 
 data = lookups.get_metadata("https://github.com/epshteinmatthew/OscillatorDatabase")
