@@ -2,12 +2,17 @@ import asyncio
 import os
 import random
 import tellurium as te
-import oscillatorlookups as lookups
-
-#todo: add pytest
+import cesiumlookups as lookups
+from cesiumlookups.lookups import Model
+import msgspec.json
 
 data = lookups.get_metadata("https://github.com/epshteinmatthew/OscillatorDatabase")
 dir_path = "result" 
+
+def test_metadata():
+    with open("./metadata.json", "r") as f:
+        mtdata = msgspec.json.decode(f.read(), type=list[Model])
+        assert mtdata == data
 
 def test_length():
     numModels = lookups.get_number_of_models_with_attrib(data)
