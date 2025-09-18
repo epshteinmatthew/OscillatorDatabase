@@ -1,7 +1,7 @@
 
 from setuptools import setup, find_packages
 
-VERSION = '1.8.4'
+VERSION = '1.8.5'
 DESCRIPTION = 'Lookup operations for cesium database'
 LONG_DESCRIPTION = 'Lookup operations for cesium database, hosted on github'
 
