@@ -1,9 +1,9 @@
-name: edit
+name: replace
 on:
   workflow_dispatch:
     inputs:
       filepath_to_change:
-        description: 'path of ant file to change'
+        description: 'path of ant file to replace'
         required: true
       replacement_string:
         description: 'ant string to replace file contents with'
