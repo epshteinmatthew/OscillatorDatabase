@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
     inputs:
       filepath_to_change:
-        description: 'path of ant file to replace'
+        description: 'path of ant file to change'
         required: true
       replacement_string:
         description: 'ant string to replace file contents with'
